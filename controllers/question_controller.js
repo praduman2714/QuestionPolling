@@ -23,3 +23,26 @@ module.exports.createQuestion = async function(req, res){
     }
 }
 
+module.exports.deleteQuestion = async function(req, res){
+    try{
+
+        const question = await Question.findById(req.params.id);
+
+        for(let option of question.options){
+            console.log(option);
+            await Option.deleteOne({_id : option});
+        }
+        question.save();
+        await Question.deleteOne({_id : question});
+
+        return res.status.json(200).json({
+            message : "Question and it's associate option deleted successfully"
+        })
+
+    }catch(err){
+        return res.status(404).json({
+            message : 'Error in deleting',
+            error : err.message
+        })
+    }
+}

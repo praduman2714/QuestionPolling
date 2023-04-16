@@ -5,5 +5,6 @@ const optionController = require('../controllers/option_controller');
 
 router.post('/create' , questionController.createQuestion);
 router.post('/:id/addOption' , optionController.addOption);
+router.get('/:id/delete' , questionController.deleteQuestion);
 
 module.exports = router;

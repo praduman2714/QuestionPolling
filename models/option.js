@@ -4,7 +4,7 @@ const optionSchema = mongoose.Schema({
     title : {
         type : 'String',
         required : true,
-        unique : true
+        // unique : true
     },
     votes : {
         type : 'Number',

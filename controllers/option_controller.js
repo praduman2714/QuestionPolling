@@ -4,14 +4,17 @@ const Question = require('../models/question');
 
 module.exports.addOption = async function(req, res){
     try{
-        const question = Question.findById(req.params.id);
+        const question = await Question.findById(req.params.id);
+        
         for(let option of req.body.title){
+            
             const currOption = await Option.create({
                 title : option
             })
             question.options.push(currOption.id);
-            question.save();
+            
         }
+        question.save();
 
         return res.status(200).json({
             message : 'Options added Succesfully'
