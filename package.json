@@ -1,0 +1,18 @@
+{
+  "name": "pollingapi",
+  "version": "1.0.0",
+  "description": "You'll be given an question, and it's option. We have to select the option, and it's vote will be u[loaded. It is purly BackEnd.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "keywords": [
+    "QuestionPollingAPI"
+  ],
+  "author": "whiteWolf",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
