@@ -41,7 +41,11 @@ module.exports.deleteOptions = async function(req, res){
     try{
         // Finding the option, with given ID , which is passed in the link
         const option = await Option.findById(req.params.id);
-
+        if(option.votes > 0){
+            return res.status(404).json({
+                message : 'This option can not be deleted, as it had votes'
+            })
+        }
         // finding the question and updating it
         await Question.updateOne(
             { options: { $in: req.params.id }},
