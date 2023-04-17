@@ -28,14 +28,26 @@ module.exports.deleteQuestion = async function(req, res){
 
         const question = await Question.findById(req.params.id);
 
+        // checking if the options contains votes or not
+
+        for(let id of question.options){
+            let option = await Option.findById(id);
+            if(option.votes > 0){
+                return res.status(404).json({
+                    message : 'You can not delete this Quesiton, as it had vote added to some options.'
+                })
+            }
+        }
+
         for(let option of question.options){
-            console.log(option);
+           // console.log(option.votes);
+           
             await Option.deleteOne({_id : option});
         }
         question.save();
         await Question.deleteOne({_id : question});
 
-        return res.status.json(200).json({
+        return res.status(200).json({
             message : "Question and it's associate option deleted successfully"
         })
  
