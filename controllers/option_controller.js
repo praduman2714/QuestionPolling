@@ -10,7 +10,9 @@ module.exports.addOption = async function(req, res){
             
             const currOption = await Option.create({
                 title : option
-            })
+            });
+            currOption.linkToVote = "http://" + req.headers.host + "/option/" + currOption.id+ "/addVote";
+            currOption.save();
             question.options.push(currOption.id);
             
         } 
@@ -55,8 +57,20 @@ module.exports.deleteOptions = async function(req, res){
 
 module.exports.addVotes = async function(req, res){
     try{
+        const option = await Option.findById(req.params.id);
+        // console.log("In AddVotes");
+        option.votes+=1;
+        await option.save();
+
+        return res.status(200).json({
+            message : 'Added the vote to option successfully',
+            votes : option.votes
+        })
 
     }catch(err){
-        
+        return res.status(404).json({
+            message : "Error in adding the votes",
+            error : err.message
+        })
     }
 }

@@ -38,10 +38,24 @@ module.exports.deleteQuestion = async function(req, res){
         return res.status.json(200).json({
             message : "Question and it's associate option deleted successfully"
         })
-
+ 
     }catch(err){
         return res.status(404).json({
             message : 'Error in deleting',
+            error : err.message
+        })
+    }
+}
+
+module.exports.showQuestionAndDescription = async function(req, res){
+    try{
+        const question = await Question.findById(req.params.id).populate('options') ;
+
+        return res.status(200).json(question);
+
+    }catch(err){
+        return res.status(404).json({
+            message : "Error in displying the question and it's options",
             error : err.message
         })
     }
