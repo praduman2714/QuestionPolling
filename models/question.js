@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-
+// Scheman for Question. It contains title and list of options(which is the of Option Schema)
 const questionSchema = mongoose.Schema({
     title : {
         type : 'String',

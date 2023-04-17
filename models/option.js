@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 
+// It is option Scheman , which constains, the title, number of votes, and linkToVotes
 const optionSchema = mongoose.Schema({
     title : {
         type : 'String',
